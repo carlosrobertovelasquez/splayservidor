@@ -1,0 +1,52 @@
+import mongoose from 'mongoose';
+
+const UsuarioSchema =mongoose.Schema({
+    email:{
+        type:String,
+        required:true,
+        trim:true,
+        unique:true
+     },
+     telefono:{
+         type:String,
+        trim:true
+     },
+     password:{
+        type:String,
+        trim:true
+     },
+    nombre:{
+        type:String,
+        trim:true
+     },
+     apellido:{
+        type:String,
+        trim:true
+     },
+     sexo:{
+         type:String,
+         trim:true
+     },
+     fechanacimiento:{
+         type:Date
+     },
+     foto:{
+         type:String
+     },
+     seguidores:Array,
+     favoritos:Array,
+     activo:{
+        type:String,
+        default:'N'
+    },
+    confirmado:{
+        type:String,
+        default:'N'
+    },
+     creado:{
+      type:Date,
+      default:Date.now()
+     },
+})
+
+module.exports=mongoose.model('Usuario',UsuarioSchema)
