@@ -11,7 +11,10 @@ const typeDefs=gql`
         nombre:String
         apellido:String
         sexo:Sexo
-        fechanacimiento:String
+        cumpleanoDia:String
+        cumpleanoMes:String
+        cumpleanoAno:String
+        pais:String
         foto:String
         favoritos:[Favorito]
         seguidores:[Seguidores]
@@ -63,7 +66,10 @@ input SeguidoresInput{
         nombre:String
         apellido:String
         sexo:String
-        fechanacimiento:String
+        cumpleanoDia:String
+        cumpleanoMes:String
+        cumpleanoAno:String
+        pais:String
         foto:String
         favoritos:[FavoritoInput]
         seguidores:[SeguidoresInput]

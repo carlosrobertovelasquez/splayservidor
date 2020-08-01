@@ -10,8 +10,10 @@ const conectarDB=async()=>{
 			useFindAndModify:false,
 			useCreateIndex:true
 		});
+		console.log('##################################');
         console.log('BD Conectada Cluster Atlas');
 	} catch (error) {
+		console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 		console.log('Hubo un error');
 		console.log(error);
 		process.exit(1);//detener la app
