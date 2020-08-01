@@ -36,7 +36,7 @@ const crearToken = (usuario, secreta, expiresIn) => {
 async function autenticarUsuario(input) {
 	//Si el usuario existe
 	const { email, password } = input;
-	const existeUsuario = await Usuario.findOne({ email });
+	const existeUsuario = await Usuario.findOne({ email: email.toLowerCase() });
 	if (!existeUsuario) {
 		throw new Error('El Usuario no existe');
 	}
