@@ -38,11 +38,14 @@ const resolvers ={
     },
     Mutation:{
         nuevoUsuario:async(_,{ input })=>{
-           const {email,password}=input;
-            //Revisar si el Usuario ya existe en la base de datos
-            const existeUsuarios=await Usuario.findOne({email});
-            if(existeUsuarios){
-                throw new Error('El Usuario ya esta registrado');
+           const newUser=input;
+           newUser.email=newUser.email.toLowerCase();
+
+           const {email,password}=newUser;
+            //Revisar si el Correo ya existe en la base de datos
+            const existeEmail=await Usuario.findOne({email});
+            if(existeEmail){
+                throw new Error('El Correo ya esta registrado');
             }
            //Hashear su password
         const hash = await bcrypt.hash(password, 10);
