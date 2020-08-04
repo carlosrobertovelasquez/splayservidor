@@ -1,106 +1,105 @@
-const {gql}=require('apollo-server-express');
+const { gql } = require('apollo-server-express');
 
 //Schema
 
-const typeDefs=gql`
-    type Usuario{
-        id:ID
-        email:String
-        password:String
-        telefono:String
-        nombre:String
-        apellido:String
-        sexo:Sexo
-        cumpleanoDia:String
-        cumpleanoMes:String
-        cumpleanoAno:String
-        pais:String
-        foto:String
-        favoritos:[Favorito]
-        seguidores:[Seguidores]
-        activo:String
-        confirmado:String
-        creado:String
-    }
+const typeDefs = gql`
+	type Usuario {
+		id: ID
+		email: String
+		password: String
+		telefono: String
+		nombre: String
+		apellido: String
+		genero: Sexo
+		cumpleanoDia: String
+		cumpleanoMes: String
+		cumpleanoAno: String
+		pais: String
+		ciudad: String
+		latitud: String
+		longitud: String
+		foto: String
+		favoritos: [Favorito]
+		seguidores: [Seguidores]
+		activo: String
+		confirmado: String
+		creado: String
+	}
 
- 
-    type Seguidores{
-        seguidoresId:String
-        nombre:String
-    }
+	type Seguidores {
+		seguidoresId: String
+		nombre: String
+	}
 
-   type Token{
-       token:String
-   } 
-  enum Sexo{
-      MASCULINO,
-    FEMENINO
-  }
+	type Token {
+		token: String
+	}
 
-type Favorito{
-    id:ID
-    nombre:String
-    url:String
-    estado:String
-    creado:String
-}
+	enum Sexo {
+		MASCULINO
+		FEMENINO
+	}
 
+	type Favorito {
+		id: ID
+		nombre: String
+		url: String
+		estado: String
+		creado: String
+	}
 
-input FavoritoInput{
-    nombre:String
-    url:String
-    estado:String
-}
+	input FavoritoInput {
+		nombre: String
+		url: String
+		estado: String
+	}
 
-input SeguidoresInput{
-    seguidoresId:String
-    nombre:String
-}
+	input SeguidoresInput {
+		seguidoresId: String
+		nombre: String
+	}
 
+	input UsuarioInput {
+		email: String
+		telefono: String
+		password: String
+		nombre: String
+		apellido: String
+		genero: String
+		cumpleanoDia: String
+		cumpleanoMes: String
+		cumpleanoAno: String
+		pais: String
+		ciudad: String
+		latitud: String
+		longitud: String
+		foto: String
+		favoritos: [FavoritoInput]
+		seguidores: [SeguidoresInput]
+		activo: String
+		confirmado: String
+	}
 
+	input AutenticarInput {
+		email: String!
+		password: String!
+	}
 
- input UsuarioInput{
-        email:String
-        telefono:String
-        password:String
-        nombre:String
-        apellido:String
-        sexo:String
-        cumpleanoDia:String
-        cumpleanoMes:String
-        cumpleanoAno:String
-        pais:String
-        foto:String
-        favoritos:[FavoritoInput]
-        seguidores:[SeguidoresInput]
-        activo:String
-        confirmado:String
-       
- }
- input AutenticarInput{
-     email:String!
-     password:String!
- }
+	type Query {
+		obtenerUsuario: Usuario
+		obtenerFavoritos: [Favorito]
+		obtenerFavorito(id: ID!): Favorito
+	}
 
-
-
-
-    type Query{
-        obtenerUsuario:Usuario
-        obtenerFavoritos:[Favorito]
-        obtenerFavorito(id:ID!):Favorito
-    }
-    type Mutation{
-        #Usuarios
-        nuevoUsuario(input:UsuarioInput):Usuario
-        autenticarUsuario(input:AutenticarInput):Token
-        
-        #Favoritos
-       nuevoFavorito(input:FavoritoInput):Favorito
-       actualizarFavorito(id:ID!,input:FavoritoInput):Favorito
-       eliminarFavorito(id:ID!):String
-       
-    }
+	type Mutation {
+		#Usuarios
+		nuevoUsuario(input: UsuarioInput): Usuario
+		autenticarUsuario(input: AutenticarInput): Token
+		#Favoritos
+		nuevoFavorito(input: FavoritoInput): Favorito
+		actualizarFavorito(id: ID!, input: FavoritoInput): Favorito
+		eliminarFavorito(id: ID!): String
+	}
 `;
 
-module.exports=typeDefs;
+module.exports = typeDefs;
