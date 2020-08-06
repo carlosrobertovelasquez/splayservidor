@@ -1,9 +1,16 @@
 const usuarioController = require('../controlles/Usuario');
 const favoritoControlle = require('../controlles/Favorito');
+const Usuario = require('../models/Usuario');
 const resolvers = {
 	Query: {
-		obtenerUsuario: async (_, {}, ctx) => {
-			return ctx.usuario;
+		obtenerUsuario: (_, args, { usuarioActual }) => {
+			if (!usuarioActual) {
+				return null;
+			}
+			console.log(usuarioActual);
+			//Obtner el usuario Actual del request del jwt
+			const usuario = Usuario.finOne({ id: usuarioActual.id });
+			return usuario;
 		},
 		obtenerFavoritos: async () => {
 			try {
