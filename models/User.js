@@ -1,70 +1,71 @@
 import mongoose from 'mongoose';
 
-const UsuarioSchema = mongoose.Schema({
+const UserSchema = mongoose.Schema({
 	email: {
 		type: String,
 		required: true,
 		trim: true,
 		unique: true
 	},
-	telefono: {
+	phone: {
 		type: String,
 		trim: true
 	},
 	password: {
 		type: String,
-		trim: true
+		trim: true,
+		required: true
 	},
-	nombre: {
+	name: {
+		type: String,
+		trim: true,
+		required: true
+	},
+	lastname: {
 		type: String,
 		trim: true
 	},
-	apellido: {
+	gender: {
 		type: String,
 		trim: true
 	},
-	genero: {
+	birthdayDay: {
+		type: String
+	},
+	birthdayMonth: {
+		type: String
+	},
+	birthdayYear: {
+		type: String
+	},
+	country: {
+		type: String
+	},
+	city: {
+		type: String
+	},
+	latitude: {
+		type: Number
+	},
+	longitude: {
+		type: Number
+	},
+	avatar: {
 		type: String,
 		trim: true
 	},
-	cumpleanoDia: {
-		type: String
-	},
-	cumpleanoMes: {
-		type: String
-	},
-	cumpleanoAno: {
-		type: String
-	},
-	pais: {
-		type: String
-	},
-	ciudad: {
-		type: String
-	},
-	latitud: {
-		type: String
-	},
-	longitud: {
-		type: String
-	},
-	foto: {
-		type: String
-	},
-	seguidores: Array,
-	favoritos: Array,
-	activo: {
+	active: {
 		type: String,
 		default: 'N'
 	},
-	confirmado: {
+	confirmed: {
 		type: String,
 		default: 'N'
 	},
-	creado: {
+	created: {
 		type: Date,
 		default: Date.now()
 	}
 });
 
-module.exports = mongoose.model('Usuario', UsuarioSchema);
+module.exports = mongoose.model('User', UserSchema);

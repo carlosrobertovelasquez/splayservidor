@@ -1,7 +1,7 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 
-require('dotenv').config({ path: 'variables.env' });
+require('dotenv').config({ path: '.env' });
 //graphql
 import { ApolloServer } from 'apollo-server-express';
 const typeDefs = require('./db/schema');

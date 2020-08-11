@@ -2,16 +2,16 @@ const bcryptjs = require('bcryptjs');
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-const Usuario = require('../models/Usuario');
+const User = require('../models/User');
 require('dotenv').config({ path: 'variables.env' });
 
-async function nuevoUsuario(input) {
+async function newUser(input) {
 	const newUser = input;
 	newUser.email = newUser.email.toLowerCase();
 
 	const { email, password } = newUser;
 	//Revisar si el Correo ya existe en la base de datos
-	const existeEmail = await Usuario.findOne({ email });
+	const existeEmail = await User.findOne({ email });
 	if (existeEmail) {
 		throw new Error('El Correo ya esta registrado');
 	}
@@ -20,23 +20,23 @@ async function nuevoUsuario(input) {
 	newUser.password = await bcryptjs.hash(password, salt);
 	try {
 		//Guardar en la base de Datos
-		const usuario = new Usuario(newUser);
-		usuario.save(); //guardado
-		return usuario;
+		const user = new User(newUser);
+		user.save(); //guardado
+		return user;
 	} catch (error) {
 		console.log(error);
 	}
 }
 
-const crearToken = (usuario, secreta, expiresIn) => {
-	const { id, email, nombre, apellido } = usuario;
-	return jwt.sign({ id, email, nombre, apellido }, secreta, { expiresIn });
+const crearToken = (user, secreta, expiresIn) => {
+	const { id, email, name, lastname } = user;
+	return jwt.sign({ id, email, name, lastname }, secreta, { expiresIn });
 };
 
-async function autenticarUsuario(input) {
+async function authenticateUser(input) {
 	//Si el usuario existe
 	const { email, password } = input;
-	const existeUsuario = await Usuario.findOne({ email: email.toLowerCase() });
+	const existeUsuario = await User.findOne({ email: email.toLowerCase() });
 	if (!existeUsuario) {
 		throw new Error('El Usuario no existe');
 	}
@@ -49,5 +49,9 @@ async function autenticarUsuario(input) {
 	return {
 		token: crearToken(existeUsuario, process.env.SECRETA, '24h')
 	};
+
+	//async function updateAvatar(file) {
+	//	console.log(file);
+	//	}
 }
-module.exports = { nuevoUsuario, autenticarUsuario };
+module.exports = { newUser, authenticateUser };
