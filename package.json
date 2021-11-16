@@ -10,7 +10,7 @@
 	"license": "ISC",
 	"dependencies": {
 		"apollo-server-express": "^2.16.0",
-		"aws-sdk": "^2.730.0",
+		"aws-sdk": "^2.814.0",
 		"bcrypt": "^5.0.0",
 		"bcryptjs": "^2.4.3",
 		"dotenv": "^8.2.0",
